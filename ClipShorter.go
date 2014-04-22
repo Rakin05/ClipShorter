@@ -64,8 +64,10 @@ func readClipBoard() {
 func shortUrl() {
 	url := <-readerChan
 
+	googleApiUrl := "https://www.googleapis.com/urlshortener/v1/url"
+
 	body := bytes.NewBufferString(fmt.Sprintf(`{"longUrl": "%s"}`, url))
-	request, _ := http.NewRequest("POST", "https://www.googleapis.com/urlshortener/v1/url", body)
+	request, _ := http.NewRequest("POST", googleApiUrl, body)
 	request.Header.Add("Content-Type", "application/json")
 
 	client := http.Client{}
